@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneLight, oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface CodeViewerProps {
   code: string;
@@ -7,6 +10,7 @@ interface CodeViewerProps {
 
 export const CodeViewer = ({ code, language = 'html' }: CodeViewerProps) => {
   const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
   
   const handleCopy = async () => {
     try {
@@ -18,11 +22,23 @@ export const CodeViewer = ({ code, language = 'html' }: CodeViewerProps) => {
     }
   };
   
+  const customStyle = {
+    margin: 0,
+    padding: '1rem',
+    // backgroundColor: 'transparent',
+    borderRadius: '0.5rem',
+  };
+
   return (
-    <div className="relative group">
-      <pre className="code-block">
-        <code>{code}</code>
-      </pre>
+    <div className="relative group bg-background rounded-lg">
+      <SyntaxHighlighter
+        language={language}
+        style={theme === 'light' ? oneLight : oneDark}
+        customStyle={customStyle}
+        wrapLongLines={true}
+      >
+        {code}
+      </SyntaxHighlighter>
       <button
         onClick={handleCopy}
         className="absolute top-2 right-2 px-3 py-1 bg-background-tertiary text-text-primary text-sm rounded 

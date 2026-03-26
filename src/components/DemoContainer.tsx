@@ -248,9 +248,9 @@ export const DemoContainer = ({ demo }: DemoContainerProps) => {
       {/* Code */}
       {showCode && (
         <div className="border-t border-border-primary">
-          <div className="p-4 bg-code-background">
+          <div className="p-4 bg-gradient-to-br from-background-primary to-background-tertiary">
             <div className="mb-6">
-              <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+              <h3 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
                 <span className="text-orange-400">{'<'}</span>
                 HTML
                 <span className="text-orange-400">{'>'}</span>
@@ -260,7 +260,7 @@ export const DemoContainer = ({ demo }: DemoContainerProps) => {
             
             {demo.css && (
               <div className="mb-6">
-                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                <h3 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
                   <span className="text-blue-400">{'{'}</span>
                   CSS
                   <span className="text-blue-400">{'}'}</span>
@@ -271,7 +271,7 @@ export const DemoContainer = ({ demo }: DemoContainerProps) => {
             
             {demo.js && (
               <div>
-                <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+                <h3 className="text-text-primary font-semibold mb-3 flex items-center gap-2">
                   <span className="text-yellow-400">{'{}'}</span>
                   JavaScript
                 </h3>
