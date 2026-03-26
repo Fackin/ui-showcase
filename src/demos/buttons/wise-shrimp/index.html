@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .type--A {
+        --line_color: #555555;
+        --back_color: #ffecf6;
+      }
+      .type--B {
+        --line_color: #1b1919;
+        --back_color: #e9ecff;
+      }
+      .type--C {
+        --line_color: #00135c;
+        --back_color: #defffa;
+      }
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .contain {
+        height: 100%;
+        width: 100%;
+        /* background-color: #ffeeee; */
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 0;
+      }
+      .button {
+        position: relative;
+        width: 240px;
+        height: 56px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      .button-text {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--line_color);
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .button::before,
+      .button::after,
+      .button-text::before,
+      .button-text::after {
+        content: "";
+        position: absolute;
+        height: 3px;
+        background-color: var(--line_color);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+      .button::before,
+      .button::after {
+        top: 0;
+      }
+      .button-text::before,
+      .button-text::after {
+        bottom: 0;
+      }
+      .button::before {
+        left: 56px;
+        width: 8px;
+      }
+      .button::after {
+        right: 56px;
+        width: calc(100% - 56px * 2 - 16px);
+      }
+      .button-text::before {
+        left: 56px;
+        width: calc(100% - 56px * 2 - 16px);
+      }
+      .button-text::after {
+        right: 56px;
+        width: 8px;
+      }
+      .button-line {
+        width: 56px;
+        height: 100%;
+        border: 3px solid var(--line_color);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        box-sizing: border-box;
+      }
+      .button-line:nth-child(1) {
+        left: 1px;
+        border-right: none;
+        border-radius: 50% 0 0 50%;
+      }
+      .button-line:nth-child(2) {
+        right: 1px;
+        border-left: none;
+        border-radius: 0 50% 50% 0;
+      }
+      .button:hover .button-text {
+        letter-spacing: 4px;
+      }
+      .button:hover::before,
+      .button-text:hover::after {
+        width: calc(100% - 56px * 2 - 16px);
+      }
+      .button:hover::after,
+      .button-text:hover::before {
+        width: 8px;
+      }
+
+      .button-draw1,
+      .button-draw2 {
+        position: absolute;
+        z-index: -1;
+        /* border-radius: 16px;
+        transform-origin: 16px 16px; */
+      }
+      .button-draw1::before,
+      .button-draw1::after,
+      .button-draw2::before,
+      .button-draw2::after {
+        content: "";
+        position: absolute;
+      }
+      .button-draw1,
+      .button-draw2,
+      .button-draw1::before,
+      .button-draw1::after,
+      .button-draw2::before,
+      .button-draw2::after {
+        border-radius: 16px;
+        transform-origin: 16px 16px;
+        background: var(--back_color);
+      }
+
+      .button-draw1 {
+        top: -16px;
+        left: 40px;
+        /* height: 100px; */
+        width: 32px;
+        height: 0;
+        transform: rotate(30deg);
+      }
+      .button-draw1::before {
+        bottom: 0;
+        left: 0;
+        /* width: 120px; */
+        width: 0;
+        height: 32px;
+        transform: rotate(-60deg);
+      }
+      .button-draw1::after {
+        top: -10px;
+        left: 45px;
+        /* width: 82px; */
+        width: 0;
+        height: 32px;
+        transform: rotate(69deg);
+      }
+      .button-draw2 {
+        top: 44px;
+        left: 77px;
+        height: 0;
+        width: 32px;
+        transform: rotate(-127deg);
+      }
+      .button-draw2::before {
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 32px;
+        transform: rotate(-146deg);
+      }
+      .button-draw2::after {
+        bottom: 26px;
+        left: -40px;
+        width: 0;
+        height: 32px;
+        transform: rotate(-262deg);
+      }
+      .button:hover .button-draw1 {
+        animation: draw1 ease-in 0.06s;
+        animation-fill-mode: forwards;
+      }
+      .button:hover .button-draw1::before {
+        animation: draw2 linear 0.08s 0.06s;
+        animation-fill-mode: forwards;
+      }
+      .button:hover .button-draw1::after {
+        animation: draw3 linear 0.03s 0.14s;
+        animation-fill-mode: forwards;
+      }
+      .button:hover .button-draw2 {
+        animation: draw4 linear 0.06s 0.2s;
+        animation-fill-mode: forwards;
+      }
+      .button:hover .button-draw2::before {
+        animation: draw5 linear 0.03s 0.26s;
+        animation-fill-mode: forwards;
+      }
+      .button:hover .button-draw2::after {
+        animation: draw6 linear 0.06s 0.32s;
+        animation-fill-mode: forwards;
+      }
+      @keyframes draw1 {
+        0% {
+          height: 0;
+        }
+        100% {
+          height: 100px;
+        }
+      }
+      @keyframes draw2 {
+        0% {
+          width: 0;
+          opacity: 0;
+        }
+        10% {
+          opacity: 0;
+        }
+        11% {
+          opacity: 1;
+        }
+        100% {
+          width: 120px;
+        }
+      }
+      /* @keyframes draw2 {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 120px;
+        }
+      } */
+      @keyframes draw3 {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 80px;
+        }
+      }
+
+      @keyframes draw4 {
+        0% {
+          height: 0;
+        }
+        100% {
+          height: 120px;
+        }
+      }
+      @keyframes draw5 {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 80px;
+        }
+      }
+      @keyframes draw6 {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 124px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contain">
+      <a href="" class="button type--C">
+        <div class="button-line"></div>
+        <div class="button-line"></div>
+        <div class="button-text">ENTRY</div>
+        <div class="button-draw1"></div>
+        <div class="button-draw2"></div>
+      </a>
+    </div>
+  </body>
+</html>

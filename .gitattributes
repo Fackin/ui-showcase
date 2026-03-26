@@ -1,0 +1,22 @@
+# 将所有文本文件设置为自动处理，Git会根据文件内容判断
+* text=auto
+
+# 对于明确的文本文件类型，强制在检出时使用 LF
+# 这对于跨平台项目是最佳实践
+*.js    text eol=lf
+*.jsx   text eol=lf
+*.ts    text eol=lf
+*.tsx   text eol=lf
+*.json  text eol=lf
+*.css   text eol=lf
+*.md    text eol=lf
+*.html  text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+
+# 对于明确的二进制文件，告诉Git不要动它们
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.svg   binary
